@@ -50,7 +50,7 @@ const SellWin = ({
       <section>
         <h3>Sell Win</h3>
         <p>
-          Sell earned tokens. Only 40000 tokens can be sold per day Earn BUSD.
+          Sell earned tokens. Only 500000000 tokens can be sold per day Earn BUSD.
         </p>
         <table>
           <tbody>

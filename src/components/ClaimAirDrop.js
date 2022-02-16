@@ -31,7 +31,7 @@ const ClaimAirDrop = ({
       <section id="claim-airdrop">
         <h2>Claim airdrop</h2>
         <p className="subtitle">
-          Complete the challenges to get airdrop. You can receive 100 Piggies
+          Complete the challenges to get airdrop. You can receive 100 Win
           every 7 days.
         </p>
         <section className="claim-section">

@@ -379,14 +379,7 @@ function App() {
           availableSupply={availableSupply}
           totalSupply={totalSupply}
         />
-        <ClaimAirDrop
-          account={account}
-          contractAddress={contractAddress}
-          availableForAirDrop={availableForAirDrop}
-          userBscStaked={userBscStaked}
-          totalReferral={totalReferral}
-          timeToNextAirDrop={timeToNextAirDrop}
-        />
+
         <section id="machine">
           <h2 className="sr-only">Machine</h2>
           <StakeBusd
@@ -426,6 +419,15 @@ function App() {
           referralTotalBonus={referralTotalBonus}
           referralBonus={referralBonus}
           totalReferral={totalReferral}
+        />
+
+        <ClaimAirDrop
+          account={account}
+          contractAddress={contractAddress}
+          availableForAirDrop={availableForAirDrop}
+          userBscStaked={userBscStaked}
+          totalReferral={totalReferral}
+          timeToNextAirDrop={timeToNextAirDrop}
         />
       </main>
     </div>

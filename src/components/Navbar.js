@@ -13,7 +13,6 @@ const Navbar = ({ connect, disconnect, provider, web3Provider, address }) => {
       <header>
         <nav id="pc">
           <ul>
-          
             <li>
               {" "}
               <a href="#">
@@ -66,13 +65,25 @@ const Navbar = ({ connect, disconnect, provider, web3Provider, address }) => {
           <div id="toggle-bar">
             <a href="#">
               <img
-                src="img/icon-piggy-coin.png"
+                className="logo-mobile"
+                src="img/logo.png"
                 alt="Icon with piggy in gold coin"
               />
             </a>
             <a className="navicon mtoggle" href="#"></a>
           </div>
           <ul id="mmenu">
+            <li>
+              {" "}
+              <a
+                href="https://thewintoken.com/"
+                target="_blank"
+                className="btn-gold"
+              >
+                Main Site
+              </a>
+            </li>
+
             <li>
               {" "}
               <a
@@ -84,12 +95,19 @@ const Navbar = ({ connect, disconnect, provider, web3Provider, address }) => {
               </a>
             </li>
 
-            <li>
-              {" "}
-              <a className="btn-gold" id="connect-btn2">
-                Connect Wallet
-              </a>
-            </li>
+            {web3Provider ? (
+              <li onClick={disconnect}>
+                <a className="btn-gray" id="connect-btn1">
+                  {trimAddress(address)}
+                </a>
+              </li>
+            ) : (
+              <li>
+                <a className="btn-gold" id="connect-btn1" onClick={connect}>
+                  Connect Wallet
+                </a>
+              </li>
+            )}
           </ul>
         </nav>
       </header>

@@ -62,7 +62,7 @@ const StakeWin = ({
               <td>
                 <h4>APR</h4>
               </td>
-              <td id="APY_T">{apyStaked}</td>
+              <td id="APY_T">{apyStaked} %</td>
             </tr>
             <tr>
               <td>

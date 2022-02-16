@@ -14,22 +14,22 @@ const StakeBusd = ({
   apyMinted,
 }) => {
   const bscAddress = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
-  const [minimumBusd, setMinimumBusd] = useState("5");
-  const [amountToInvest, setAmountToInvest] = useState("5");
+  const [minimumBusd, setMinimumBusd] = useState("20");
+  const [amountToInvest, setAmountToInvest] = useState("20");
   const addressZero = "0x0000000000000000000000000000000000000000";
 
   const handleAmountToInvest = (e) => {
     const value = e.target.value;
-    if (+value < 5) {
-      setAmountToInvest(5);
+    if (+value < 20 ) {
+      setAmountToInvest(20);
     }
     setAmountToInvest(value);
   };
 
   const handleMinimumValue = (e) => {
     const value = e.target.value;
-    if (+value < 5) {
-      setMinimumBusd(5);
+    if (+value < 20 ) {
+      setMinimumBusd(20);
     }
     setMinimumBusd(value);
   };
@@ -67,8 +67,8 @@ const StakeBusd = ({
   };
 
   const stakeBUSDToInvest = async () => {
-    if (amountToInvest < 5) {
-      alert("The minimum stake of BUSD is 5 $BUSD");
+    if (amountToInvest < 20 ) {
+      alert("The minimum stake of BUSD is 20 $BUSD");
       return;
     }
     const contract = new ethers.Contract(contractAddress, ABI, web3Provider);
@@ -102,7 +102,7 @@ const StakeBusd = ({
               <td>
                 <h4>APR</h4>
               </td>
-              <td id="APY_M">{apyMinted}%</td>
+              <td id="APY_M">{apyMinted} %</td>
             </tr>
             <tr>
               <td>
@@ -145,19 +145,19 @@ const StakeBusd = ({
           <button onClick={approveBUSD}>APPROVE</button>
         </div>
         <div className="machine-input">
-          <p>There is $5 minimum</p>
+          <p>There is $20 minimum</p>
           <input
             type="number"
             name="use-busd"
             id="input-busd"
             placeholder="Enter Amount"
             value={amountToInvest}
-            min="5"
+            min="20"
             onChange={handleAmountToInvest}
           />
           <button
             className="btn-gray"
-            onClick={() => setMinimumBusd(bscBalance)}
+            onClick={() => setAmountToInvest(bscBalance)}
           >
             MAX
           </button>

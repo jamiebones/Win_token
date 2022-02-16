@@ -33,7 +33,7 @@ const WinStats = ({
           <h2 className="sr-only">Supply information</h2>
           <div className="piggy-stats">
             <img src="img/icon-stock.png" alt="Icon with busd stock image" />
-            <h2>Total supply</h2>
+            <h2>Circulating supply</h2>
             <h3>
               <span id="limit-supply">{totalSupply}</span>
             </h3>
@@ -41,7 +41,7 @@ const WinStats = ({
           </div>
           <div className="piggy-stats">
             <img src="img/icon-busd.png" alt="Icon with busd gold logo" />
-            <h2>Circulating supply</h2>
+            <h2>MAXIMUM SUPPLY</h2>
             <h3>
               <span id="total-supply">{circulatingSupply}</span>
             </h3>
