@@ -102,7 +102,8 @@ const StakeWin = ({
             <b>{userUnclaimTokenStake ? userUnclaimTokenStake : "..."}</b>
           </p>
           <img
-            src="img/icon-piggy-coin.png"
+            style={{ width: "150px" }}
+            src="img/logo.png"
             alt="Icon with piggy in gold coin"
           />
           <a id="claimT" className="btn-gold" onClick={claimBuddyTokensStaked}>

@@ -124,8 +124,9 @@ const StakeBusd = ({
             {userUnclaimTokenMinting}
           </p>
           <img
-            src="img/icon-piggy-coin.png"
-            alt="Icon with piggy in gold coin"
+            style={{ width: "150px" }}
+            src="img/logo.png"
+            alt="Icon with Win in gold coin"
           />
           <a id="claimM" className="btn-gold" onClick={claimTokensMinted}>
             Claim
@@ -169,7 +170,8 @@ const StakeBusd = ({
           BUSD
         </p>
         <img
-          src="img/illu-coins-added-to-piggy.png"
+          
+          src="img/logo.png"
           alt="illustration of filling piggy bank with tokens"
         />
       </section>

@@ -19,8 +19,8 @@ const WinStats = ({
           <h2 className="sr-only">WIN Token information</h2>
           <div className="piggy-stats">
             <img
-              src="img/icon-piggy-coin.png"
-              alt="Icon with piggy in gold coin"
+              src="img/logo.png"
+              alt="Icon with Win in gold coin"
             />
             <h2>WIN Token Price</h2>
             <h3>

@@ -115,7 +115,8 @@ const SellWin = ({
           <span id="user-token-balance-2">{buddyTokenBalance}</span> Win
         </p>
         <img
-          src="img/illu-piggy-poop.png"
+          
+          src="img/logo.png"
           alt="illustration of big piggy pooping busd coins"
         />
       </section>

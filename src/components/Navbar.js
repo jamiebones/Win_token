@@ -13,12 +13,14 @@ const Navbar = ({ connect, disconnect, provider, web3Provider, address }) => {
       <header>
         <nav id="pc">
           <ul>
+          
             <li>
               {" "}
               <a href="#">
                 <img
-                  src="img/icon-piggy-coin.png"
-                  alt="Icon with piggy in gold coin"
+                  className="logo"
+                  src="img/logo.png"
+                  alt="Icon with Win in gold coin"
                 />
               </a>
             </li>
@@ -26,7 +28,18 @@ const Navbar = ({ connect, disconnect, provider, web3Provider, address }) => {
             <li>
               {" "}
               <a
-                href="https://bscscan.com/address/0xB93e4681d13095B0bC2E264F2CB22143d9fd0D53"
+                href="https://thewintoken.com/"
+                target="_blank"
+                className="btn-gold"
+              >
+                Main Site
+              </a>
+            </li>
+
+            <li>
+              {" "}
+              <a
+                href="https://bscscan.com/address/0x892e571B4B993CC4327e34a15527b26C254871D2"
                 target="_blank"
                 className="btn-gold"
               >
