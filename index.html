@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from piggybankmachine.io/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Feb 2022 17:49:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta httequiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <title>Piggy Bank Machine</title>
+    
+
+	<link rel="stylesheet" href="css/styled41d.css?">
+	
+	 <script src="../www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart, timeline']});
+        google.charts.setOnLoadCallback(drawVisualization);
+    
+        function drawVisualization() {
+            var action = "getData";
+            var jsonData = $.ajax({
+                url: "./ajax/chart.php",
+                method: "POST",
+                dataType: "JSON",
+                async: false,
+                data: {action: action}
+            }).responseJSON;
+
+            var container = document.getElementById('chart_div');
+            var chart = new google.visualization.Timeline(container);
+            var data = new google.visualization.arrayToDataTable(jsonData);
+            var options = {
+                width: "100%",
+                height: 650,
+                backgroundColor: 'transparent',
+                colors: ['#FDD22E', '#aaa'],
+                legend: 'none',
+                curveType: 'function',
+                bar: {groupWidth: '85%'},
+                hAxis: {textStyle:{color: '#e3e3e3'}},
+                vAxis: {textStyle:{color: '#e3e3e3'},gridlines:{color: '#333',count: 0}},
+                seriesType: 'bars',
+                series: {1: {type: 'line'}}
+            };
+
+            // if window width > 1000 change chart height to 650, else 100%
+            (window.innerWidth > 1000) ? options.height = 650 : options.height = "100%";
+
+            var chart = new google.visualization.ComboChart(container);
+            chart.draw(data, options);
+        }
+        // BEFORE
+        // $(window).resize(function(){
+        //     drawVisualization();
+        // });
+        
+        // AFTER
+        window.addEventListener('resize', function(event){
+            drawVisualization();
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+		<nav id="pc">
+             <ul >
+                <li> <a href="#"><img src="img/icon-piggy-coin.png" alt="Icon with piggy in gold coin"></a></li>
+                <li> <a href="https://t.me/piggybankmachine" class="btn-gold">Telegram</a></li>
+                <li> <a href="https://bscscan.com/address/0xB93e4681d13095B0bC2E264F2CB22143d9fd0D53" target="_blank" class="btn-gold">Contract</a></li>
+                <li> <a href="piggy-white-paper.pdf" class="btn-gold">Whitepaper</a></li>
+                <li> <a href="https://hazecrypto.net/audit/PiggyBankMachine" target="_blank" class="btn-gold">Audit</a></li>
+				<li> <a class="btn-gold" id="connect-btn1" onclick="Connect()">Connect Wallet</a></li>
+            </ul>
+        </nav>
+       <nav id="mobile">
+		    <div id="toggle-bar">
+				  <a href="#"><img src="img/icon-piggy-coin.png" alt="Icon with piggy in gold coin"></a>
+        	<a class="navicon mtoggle" href="#"></a>
+    		</div>
+             <ul id="mmenu">
+               
+                <li> <a href="https://t.me/piggybankmachine" class="btn-gold">Telegram</a></li>
+                <li> <a href="https://bscscan.com/address/0xB93e4681d13095B0bC2E264F2CB22143d9fd0D53" target="_blank" class="btn-gold">Contract</a></li>
+                <li> <a href="piggy-white-paper.pdf" class="btn-gold">Whitepaper</a></li>
+                 <li> <a href="https://hazecrypto.net/audit/PiggyBankMachine" target="_blank" class="btn-gold">Audit</a></li>
+				<li> <a class="btn-gold" id="connect-btn2" onclick="Connect()">Connect Wallet</a></li>
+            </ul>
+        </nav>
+		
+		
+    </header>
+    <main>
+
+        <section id="piggy-bank-machine" >
+            <h1>Piggy bank machine</h1>
+            <img src="img/illu-coins-added-to-piggy.png" alt="illustration of filling piggy bank with tokens">
+            <p class="subtitle">Use BUSD to earn Piggies to stake and sell for BUSD.</p>
+            <section>
+                <h2 class="sr-only">Piggy information</h2>
+                <div class="piggy-stats">
+                    <img src="img/icon-piggy-coin.png" alt="Icon with piggy in gold coin">
+                    <h2>Piggy Price</h2>
+                    <h3><span id="token-priceM">0.00</span> BUSD</h3>
+                </div>
+                <div class="piggy-stats">
+                    <img src="img/icon-users.png" alt="Icon with users in gold">
+                    <h2>Total invested users</h2>
+                    <h3><span id="totalUsers">...</span></h3>
+                </div>
+            </section>
+            <span class="effect-linebreak"></span>
+            <section>
+                <h2 class="sr-only">Supply information</h2>
+                <div class="piggy-stats">
+                    <img src="img/icon-stock.png" alt="Icon with busd stock image">
+                    <h2>Total supply</h2>
+                    <h3><span id="limit-supply">...</span></h3>
+                    <span id="graph-supply-total"></span>
+                </div>
+                <div class="piggy-stats">
+                    <img src="img/icon-busd.png" alt="Icon with busd gold logo">
+                    <h2>Circulating supply</h2>
+                    <h3><span id="total-supply">...</span></h3>
+                    <span id="graph-supply-circulating"></span>
+                </div>
+                <div class="piggy-stats">
+                    <img src="img/icon-check.png" alt="Icon with checked image">
+                    <h2>Available supply</h2>
+                    <h3><span id="available-supply">...</span></h3>
+                    <span id="graph-supply-available"></span>
+                </div>
+            </section>
+            <img src="img/illu-big-piggy-poop.png" alt="illustration of big piggy pooping busd coins">
+        </section>
+        <section id="claim-airdrop">
+            <h2>Claim airdrop</h2>
+            <p class="subtitle">Complete the challenges to get airdrop. You can receive 100 Piggies every 7 days. 
+            </p>
+            <section class="claim-section">
+                <h4>Available for Airdrop</h4>
+                <p id="available-airdrop">10000</p>
+                <a  class="btn-gold" id="claimA">Claim</a>
+            </section>
+            <div id="airdrop-c-1">
+                <div class="effect-gold-borders challenge">
+                    <h3>Challenge 1</h3>
+                    <p>Have at least 100.00 BUSDT in Stake</p>
+                </div>
+                <span class="effect-checkbox"></span>
+                <label for="challenge1">You have not completed this</label>
+            </div>
+            <div id="airdrop-c-2">
+                <div class="effect-gold-borders challenge">
+                    <h3>Challenge 2</h3>
+                    <p>7 days since the last claim</p>
+                </div>
+                <span class="effect-checkbox"></span>
+                <label for="challenge1">You have not completed this</label>
+            </div>
+            <div id="airdrop-c-3">
+                <div class="effect-gold-borders challenge">
+                    <h3>Challenge 3</h3>
+                    <p>Have 5 more referrals (from level 1)</p>
+                </div>
+                <span class="effect-checkbox"></span>
+                <label for="challenge3">You have not completed this</label>
+            </div>
+           
+        </section>
+        <section id="machine">
+            <h2 class="sr-only">Machine</h2>
+            <section>
+                <h3>Mint Piggies</h3>
+                <p>Mint Piggies by staking your BUSD You can stake as many times as you want. You cannot unstake this
+                    BUSD.</p>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h4>APR</h4>
+                            </td>
+                            <td id="APY_M">...</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4>MY STAKE</h4>
+                            </td>
+                            <td id="user-BUSD-staked">...</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4>TOTAL STAKE</h4>
+                            </td>
+                            <td id="total-BUSD-staked">...</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <section>
+                    <h4>Piggies Minted</h4>
+                    <p class="subtitle" id="user-unClaimed-M">0.00</p>
+                    <img src="img/icon-piggy-coin.png" alt="Icon with piggy in gold coin">
+                    <a id="claimM" class="btn-gold">Claim</a>
+                </section>
+                <div class="machine-input">
+                    <p>Approve BUSD spend</p>
+                    <input type="number" name="approve-busd" id="input-approve" placeholder="Enter Amount">
+                    <button onclick="approveBUSD()">APPROVE</button>
+                </div>
+                <div class="machine-input">
+                    <p>There is $35
+						minimum</p>
+                    <input type="number" name="use-busd" id="input-busd" placeholder="Enter Amount">
+                    <button class="btn-gray" onclick="SetMaxBUSD()">MAX</button>
+                    <button class="btn-gray" onclick="stakeM()">USE</button>
+                </div>
+                <p class="info-wallet-balance">Wallet Balance: <span  id="user-BUSD-balance-1">0.0000</span> BUSD</p>
+                <img src="img/illu-coins-added-to-piggy.png" alt="illustration of filling piggy bank with tokens">
+            </section>
+
+
+            <section>
+                <h3>Stake Piggies</h3>
+                <p>Stake Piggies to earn Piggies. You can stake as many times as you want. You can unstake after 7 days.
+                </p>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h4>APR</h4>
+                            </td>
+                            <td id="APY_T">...</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4>MY STAKE</h4>
+                            </td>
+                            <td id="user-token-staked">...</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4>TOTAL STAKE</h4>
+                            </td>
+                            <td id="total-token-staked">...</td>
+                        </tr>
+						</tbody>
+                </table>
+				 <table>
+                    <tbody>
+						<tr>
+							<td>
+								<h4 id="time-tounstake"></h4>
+							</td>
+							 <td align="right"><button class="main__unstake-btn btn-gray" id="unstake">UNSTAKE</button></td>
+						</tr>
+                    </tbody>
+                </table>
+                <section>
+                    <h4>Piggies Earned</h4>
+                    <p class="subtitle" id="user-unClaimed-T">0.00</p>
+                    <img src="img/icon-piggy-coin.png" alt="Icon with piggy in gold coin">
+                    <a id="claimT" class="btn-gold">Harvest</a>
+                </section>
+                <div class="machine-input">
+                    <p>There is no minimum to stake</p>
+                    <input type="number" name="stake-busd" placeholder="Enter Amount" id="input-2">
+                    <button class="btn-gray" onclick="SetMaxBUSDMachine()">MAX</button>
+                    <button class="btn-gray" onclick="stakeT('#input-2')">STAKE</button>
+                </div>
+                <p class="info-wallet-balance">Wallet Balance: <span  id="user-token-balance-1">0.0000</span> Piggies</p>
+                <img src="img/illu-staking-coins.png" alt="illustration of staking coins">
+            </section>
+
+            
+            <section>
+                <h3>Sell Piggies</h3>
+                <p>Sell earned tokens. Only 40000 tokens can be sold per day Earn BUSD.</p>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h4>Sold today</h4>
+                            </td>
+                            <td id="total-sold-today">...</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4>Available today</h4>
+                            </td>
+                            <td id="available-to-sell">...</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4>Reset In</h4>
+                            </td>
+                            <td id="time-tonextday">...</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <section>
+                    <h4>Piggies Price</h4>
+                    <p class="subtitle" id="token-price">0.00</p>
+                    <img src="img/icon-busd.png" alt="Icon with busd gold logo">
+                </section>
+                <div class="machine-input">
+                    <p> You will get <span id="sell-calc">0.00 BUSD</span></p>
+                    <input type="number" name="stake-busd"  placeholder="Enter Amount" id="input-3">
+                    <button class="btn-gray" onclick="SetMaxBUSDMachineToSell()">MAX</button>
+                    <button class="btn-gray" onclick="sell('#input-3')">SELL</button>
+                </div>
+               <p class="info-wallet-balance">Wallet Balance: <span  id="user-token-balance-2">0.00</span> Piggies</p>
+                <img src="img/illu-piggy-poop.png" alt="illustration of big piggy pooping busd coins">
+            </section>
+        </section>
+        <section id="information">
+            <h2>Information</h2>
+            <p>Piggy Bank Machine Token - 0xB93e4681d13095B0bC2E264F2CB22143d9fd0D53<br><br>
+                <span class="highlight-border">
+                    Launch Date
+                    - YouTubers and influencers will be allocated 100 Piggies each to record marketing content. 
+                    - Big YouTubers and influencers will giveaway a total of 5000 Piggies prior to launch for receivers to stake as early access.
+                    - Piggies can be used from (***Saturday, February 12, 2022 1:00:00 PM GMT onwards+++)
+                    <span>
+                        <br><br>
+                        The value of Piggies will rise as more users invest BUSD.
+                        <br><br>
+                        Process
+                        <br>1.1. Enter BUSD into the piggy bank machine and earn daily staking rewards in Piggy Bank tokens (4% per day). You can claim your Piggy Bank rewards at anytime. You cannot unstake your BUSD.
+                        <br>
+                        1.2. You will earn Piggies as a percentage of BUSD invested irrespective of the Piggy Price.
+                        <br>1.3. i.e. If you invest 100 BUSD you will receive 4 Piggies per day.
+                        per day
+                        <br><br>
+                        2. You have two options with your Piggies, you can sell them for BUSD, or you can stake them to earn more Piggies (6% per day). Piggies staking is locked for 7 days.
+                        <br><br>3. Terminology 
+						<br>3.1. Total Supply : The maximum amount of Piggies that can exist
+                        <br>3.2. Circulating Supply : The amount of Piggies that are currently in wallets.
+                        <br>
+                        3.3. Available Supply : (Total Supply - Circulating Supply)
+                        <br>
+                        3.4. Piggy Price : (Total BUSD Balance / Available Supply) Mint Piggies - As you claim Piggies from minting, it is removed from the Available Supply and added to the Circulating Supply
+                        <br><br>
+                        4.  Sell Piggies - As you sell Piggies, it is removed from the Circulating Supply and added to the Available Supply DYOR! 
+As this is the first one of these that we are deploying, there is always a risk of the uncertain. Only use funds you can afford to lose.
+            </p>
+            <img src="img/illu-piggy-reading-info.png" alt="illustration of piggy reading information">
+
+            <section class="effect-gold-borders">
+                <h3>Your referral link</h3>
+                <div class="machine-input">
+                    <input type="text" name="referral-link" value="..." id="ref-link">
+                    <button class="btn-gray" onclick="copyToClipboard('#ref-link')">Copy</button>
+                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h4>Referral earned available</h4>
+                            </td>
+                            <td id="referral-available">...</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4>Total Referral earned</h4>
+                            </td>
+                            <td id="referral-earned">...</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4>Total Referral Withdrawn</h4>
+                            </td>
+                            <td id="referral-withdrawn">...</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4>Total referrals</h4>
+                            </td>
+                            <td id="total-referrals">...</td>
+                        </tr>
+                    </tbody>
+                </table>
+                 <button id="withdraw-referral-btn" class="btn-gold" onclick="">Withdraw Refferal Earnings</button>
+                <p>
+                    Earn $BUSD by inviting people to Piggy Bank.<br><br> You will receive:<br><br> 4% from each level 1
+                    referral
+                    deposits 2% from each level 2 referral deposits 1% from each level 3 referral deposits <br><br>
+                    Deposit
+                    at least once to activate Referral Rewards.
+                </p>
+                <img src="img/illu-coin-pile.png" alt="illustration of busd coin pile">
+            </section>
+        </section>
+				
+		<section id="piechart">
+            <h2>Price Chart</h2>
+             <div id="chart_div"></div>
+        </section>
+    </main>
+    <footer>
+        <img src="img/illu-busd-coins.png" alt="illustration of busd coins in a row">
+        <span class="effect-spotlight"></span>
+    </footer>
+		 <script src="assets_main_fy/scripts/jquery.min.js"></script>
+  <script src="assets_main_fy/scripts/main.js"></script>
+  <script src="assets_main_fy/scripts/web3.min.js"></script>
+  <script src="assets_main_fy/scripts/index_202201191456.js"></script>
+  <script src="assets_main_fy/js/main.js"></script>
+		
+	
+</body>
+
+
+<!-- Mirrored from piggybankmachine.io/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Feb 2022 17:49:49 GMT -->
+</html>
+		<script>
+var countDownDate = new Date("Feb 12, 2022 13:00:00  GMT+00:00").getTime();
+var x = setInterval(function() {
+var now = new Date().getTime();
+var distance = countDownDate - now;
+var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("countdown").innerHTML = "WE ARE LIVE NOW";
+}
+}, 1000);
+</script>
